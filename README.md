@@ -2,7 +2,7 @@
 Shell scripts (Batch scripts soon) to do pre and post execution tasks, in performance testing, like start and stop monitoring tools, get logs, organize them in folders, etc.
 
 ## IMPORTANT: 
--Each script uses several routes (to logs, programs, etc.), it's important to have the same routes for each file in our system, or edit the scripts in order to have them working properly.
+-Each script uses several directories (to logs, programs, etc.), it's important to have the same directories for each file in our system, or edit the scripts in order to have them working properly.
 -One of the scripts functionalities is to take an SQL dump thorugh JMX for GeneXus apps, this must be configured before using the scripts. More information about this could be found in: http://wiki.genexus.com/commwiki/servlet/wiki?1997,Monitoring+and+Management+of+GX+applications.
 
 ## The Scripts:

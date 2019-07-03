@@ -9,11 +9,23 @@ cmdLineJMXJar=./cmdline-jmxclient-0.10.3.jar
 jmxHost=localhost
 port=8999
 ##################################
+#Progress bar functions:
+already_done() { for ((done=0; done<(elapsed) ; done=done+1 )); do printf "▇"; done }
+remaining() { for (( remain=(elapsed) ; remain<(duration) ; remain=remain+1 )); do printf " "; done }
+percentage() { printf "| %s%%" $(( ((elapsed)*100)/(duration)*100/100 )); }
+clean_line() { printf "\033[A"; }
+##################################
+elapsed=1
+duration=$(wc -w <<< "$HOSTS")
+#
 echo "Starting execution..."
 for HOSTNAME in ${HOSTS}; do
 	#Connect to each server and run nmon process
 	ssh ${USERNAME}@${HOSTNAME} ~/nmon_x86_64_centos6 -s 10 -ft -c 9999
-	echo "nmon in server ${HOSTNAME} started..."
+	already_done; remaining; percentage
+	echo " -----> nmon in server ${HOSTNAME} started..."
+	clean_line
+    elapsed=$((elapsed + 1))
 done
 #
 #Connect JMX and get SQL dump
